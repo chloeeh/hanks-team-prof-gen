@@ -14,22 +14,25 @@ const DIST_DIR = path.resolve(__dirname, 'dist');
 const outputPath = path.join(DIST_DIR, 'teamProfile.html');
 
 // Import HTML template
-const templateHTML = require('./src/templateHTML');
+const templateHTML = require('./src/build-html');
 
 // Create an empty array of team members
 const teamMembers = [];
 
 
-// ------------------------------------------------ ADD TEAM MEMBERS ------------------------------------------------
 
+// ------------------------------------------------ EMPLOYEE DATA ------------------------------------------------
+
+// Allow user to create a new team member OR if user selects "I'm done adding. Create directory"
+// then end prompts and create file
 function addTeamMember() {
     inquirer
         .prompt([
             {
                 type: 'list',
                 name: 'what_team_member',
-                message: 'Add an engineer, Add an intern or finish assembling your team?',
-                choices: ['Engineer', 'Intern', 'Assemble Team!'],
+                message: 'Add an engineer, Add an intern, or create team directory?',
+                choices: ['Engineer', 'Intern', 'I am done adding. Create directory.'],
             },
         ])
         .then((val) => {
@@ -42,8 +45,6 @@ function addTeamMember() {
             }
         });
 }
-
-// ------------------------------------------------ EMPLOYEES ------------------------------------------------
 
 /* ------------------------- Get manager data inputs ------------------------ */
 function addManager() {
@@ -66,24 +67,24 @@ function addManager() {
             },
             {
                 type: 'input',
-                name: 'imgSrc',
-                message: 'What is the imgSrc of the team manager?',
-            },
-            {
-                type: 'input',
                 name: 'officeNumber',
                 message: 'What is the office number of the team manager?',
             },
         ])
         .then((val) => {
-            const manager = new Manager(val.name, val.id, val.email, val.imgSrc, val.officeNumber);
-            console.table(manager);
+            // create a new manager from manager class, inherited from employee class
+            const manager = new Manager(val.name, val.id, val.email, val.officeNumber);
+            // add manager to the teamMembers[] array
             teamMembers.push(manager);
+            // Once a manager has been created, call the addTeamMember function
+            // go to addTeamMember() function for the option to add another employee 
+            // or build team from the items in the teamMembers[] array
             addTeamMember();
         });
 }
 
 /* ------------------------ Get engineer data inputs ------------------------ */
+// These are questions specific to an engineer
 function addEngineer() {
     inquirer
         .prompt([
@@ -104,19 +105,17 @@ function addEngineer() {
             },
             {
                 type: 'input',
-                name: 'imgSrc',
-                message: 'What is the img Src of the Engineer?',
-            },
-            {
-                type: 'input',
                 name: 'gitHub',
                 message: `What is the engineer's github profile name?`,
             },
         ])
         .then((val) => {
-            const engineer = new Engineer(val.name, val.id, val.email, val.imgSrc, val.gitHub);
-            console.table(engineer);
+            // create a new engineer from the engineer class, inherited from the employee class
+            const engineer = new Engineer(val.name, val.id, val.email, val.gitHub);
+            // add the new engineer to the teamMembers[] array
             teamMembers.push(engineer);
+            // go to addTeamMember() function for the option to add another employee or build team
+            // from the items in the teamMembers[] array
             addTeamMember();
         });
 }
@@ -142,18 +141,15 @@ function addIntern() {
             },
             {
                 type: 'input',
-                name: 'imgSrc',
-                message: 'What is the img Src of the Intern?',
-            },
-            {
-                type: 'input',
                 name: 'school',
                 message: `What school did the intern go to?`,
             },
         ])
         .then((val) => {
-            const intern = new Intern(val.name, val.id, val.email, val.imgSrc, val.school);
-            console.table(intern);
+            // create a new intern from the intern class, inherited from the employee class
+            const intern = new Intern(val.name, val.id, val.email, val.school);
+            // go to addTeamMember() function for the option to add another employee or build team
+            // from the items in the teamMembers[] array
             teamMembers.push(intern);
             addTeamMember();
         });
@@ -161,10 +157,15 @@ function addIntern() {
 
 // ------------------------------------------------ BUILD HTML ------------------------------------------------
 
+// Create the html file based on the employees in the teamMembers[] array
 function createTeamFile() {
+    // if the html file does NOT already exist, then create a file following the path
+    // that is represented by 'DIST_DIR' (which is the ./dist/ path)
     if (!fs.existsSync(DIST_DIR)) {
         fs.mkdirSync(DIST_DIR);
     } else {
+        // if the html file DOES already exist, then write to the file following the path
+        // that is represented by 'DIST_DIR' (which is the ./dist/ path) 
         fs.writeFileSync(outputPath, templateHTML(teamMembers), 'utf-8');
         console.log('HTML file created in the dist folder');
     }
@@ -172,8 +173,11 @@ function createTeamFile() {
 
 // ------------------------------------------------ BEGIN PROGRAM ------------------------------------------------
 
+// When the init() function is called, first prompt the user 
+// to name a manager to kick off the program
 function init() {
     addManager();
 }
 
+// Run the program!
 init();
