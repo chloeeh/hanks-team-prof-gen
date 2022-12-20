@@ -7,10 +7,9 @@ const renderTeam = (team) => {
     // Create the manager card with the data inputs
     const renderManager = (manager) => `
                 <div class="card col-3 me-3 mb-5 employee-card">
-                    <img src="${manager.imgSrc}">
                     <div class="card-header employee-header">
                         <h2 class="card-title">${manager.name}</h2>
-                        <h3 class="card-title"><i class="fa-solid fa-people-roof"></i> ${manager.title}</h3>
+                        <h3 class="card-title"><i class="fa-solid fa-mug-hot"></i> ${manager.getRole()}</h3>
                     </div>
                     <div class="card-body">
                         <ul class="list-group">
@@ -24,13 +23,13 @@ const renderTeam = (team) => {
                 </div>
         `;
 
+
     // Create the engineer card with the data inputs
     const renderEngineer = (engineer) => `
                 <div class="card col-3 me-3 mb-5 employee-card">
-                    <img src="${engineer.imgSrc}">
                     <div class="card-header employee-header">
                         <h2 class="card-title">${engineer.name}</h2>
-                        <h3 class="card-title"><i class="fa-solid fa-wrench"></i> ${engineer.title}</h3>
+                        <h3 class="card-title"><i class="fa-solid fa-glasses"></i> ${engineer.getRole()}</h3>
                     </div>
                     <div class="card-body">
                         <ul class="list-group">
@@ -51,10 +50,9 @@ const renderTeam = (team) => {
     // Create the intern card with the data inputs
     const renderIntern = (intern) => `
                 <div class="card col-3 me-3 mb-5 employee-card">
-                    <img src="${intern.imgSrc}">
                     <div class="card-header employee-header">
                         <h2 class="card-title">${intern.name}</h2>
-                        <h3 class="card-title"><i class="fa-solid fa-wrench"></i> ${intern.title}</h3>
+                        <h3 class="card-title"><i class="fa-solid fa-user-graduate"></i> ${intern.getRole()}</h3>
                     </div>
                     <div class="card-body">
                         <ul class="list-group">
