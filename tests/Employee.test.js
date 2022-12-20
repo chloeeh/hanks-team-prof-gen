@@ -36,9 +36,32 @@ test('Add property "email" to Employee object', () => {
     expect(newEmployee.email).toBe('gdb@outlook.com');
 });
 
+// --------------------------- These are the methods within Employee class ---------------------------
+
 // Test Employee.getRole()
-test('Add property "role" to Employee object', () => {
+test('role is from method .getRole()', () => {
     const role = 'Employee';
     const newEmployee = new Employee('Gary', 1234, 'gdb@outlook.com');
     expect(newEmployee.getRole()).toBe('Employee');
+});
+
+// Test Employee.getName()
+test('name is from method .getName()', () => {
+    const myName = 'Gary';
+    const newEmployee = new Employee(myName, 1234, 'gdb@outlook.com');
+    expect(newEmployee.getName()).toBe(myName);
+});
+
+// Test Employee.getId()
+test('id is from method .getId()', () => {
+    const myId = 9876;
+    const newEmployee = new Employee('Gary', myId, 'gdb@outlook.com');
+    expect(newEmployee.getId()).toBe(myId);
+});
+
+// Test Employee.getEmail()
+test('email is from method .getEmail()', () => {
+    const myEmail = 'gdb@outlook.com';
+    const newEmployee = new Employee('Gary', 1234, myEmail);
+    expect(newEmployee.getEmail()).toBe(myEmail);
 });
