@@ -1,6 +1,3 @@
-const Intern = require("../lib/Intern");
-
-
 // Follow this link for an example: https://jestjs.io/docs/getting-started
 // Make sure to modify the "scripts:" section to "jest" instead
 // of the placeholder text
@@ -8,6 +5,8 @@ const Intern = require("../lib/Intern");
 // To run tests, npm install --save-dev jest
 // then, npm test
 // it will run all .test.js files
+
+const Intern = require("../lib/Intern");
 
 // Test the base object
 test('Create a new intern', () => {

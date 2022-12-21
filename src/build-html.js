@@ -1,10 +1,8 @@
-/* -------------------------------------------------------------------------- */
-/*                                 HTML cards                                 */
-/* -------------------------------------------------------------------------- */
 
 // create all the different team cards based off the inputs
 const renderTeam = (team) => {
-    // Create the manager card with the data inputs
+    // Create the manager card with the data inputs using string literals
+    // Manager card reports name, role, id number, email address, and office number
     const renderManager = (manager) => `
                 <div class="card employee-card me-3 mb-5">
                     <div class="card-header">
@@ -24,7 +22,8 @@ const renderTeam = (team) => {
         `;
 
 
-    // Create the engineer card with the data inputs
+    // Create the engineer card with the data inputs using string literals
+    // Engineer card reports name, role, id number, email address, and github username
     const renderEngineer = (engineer) => `
                  <div class="card employee-card me-3 mb-5">
                      <div class="card-header">
@@ -47,7 +46,8 @@ const renderTeam = (team) => {
                 </div>
         `;
 
-    // Create the intern card with the data inputs
+    // Create the intern card with the data inputs using string literals
+    // Intern card reports name, role, id number, email address, and name of school intern attends
     const renderIntern = (intern) => `
                 <div class="card employee-card me-3 mb-5">
                      <div class="card-header">
@@ -66,9 +66,9 @@ const renderTeam = (team) => {
                 </div>
         `;
 
-    /* -------------------------- join and render HTML -------------------------- */
+    /* -------------------------- Join and Render HTML -------------------------- */
 
-    // Create an empty array for the html cards
+    // Create an empty array for the HTML cards
     const html = [];
 
     // Add the manager to the empty array of HTML cards
@@ -100,11 +100,11 @@ const renderTeam = (team) => {
     return html.join('');
 };
 
-/* -------------------------------------------------------------------------- */
-/*                    Main HTML Boilerplate, Head and Body                    */
-/* -------------------------------------------------------------------------- */
 
+/* ----------------------------------------- Join and Render HTML ----------------------------------------- */
 // Create main html
+// call the renderTeam() function inside this main HTML body string literal to insert the cards the user
+// desires based on user input to the prompts
 const renderMain = (team) => `
 <!DOCTYPE html>
 <html lang="en">
@@ -140,4 +140,5 @@ const renderMain = (team) => `
 </html>
 `;
 
+// / export this file as a module to be called in the index file
 module.exports = renderMain;

@@ -3,7 +3,10 @@ const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs');
 
-// Import classes
+// Import child classes of the Employee class
+// Employee class not included here, because user must select 
+// the child classes. Employee class is not an option for user
+// selection
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -35,6 +38,7 @@ function addTeamMember() {
                 choices: ['Engineer', 'Intern', 'I am done adding. Create directory.'],
             },
         ])
+        // Based on user selection, call the relevant function
         .then((val) => {
             if (val.what_team_member === 'Engineer') {
                 addEngineer();
@@ -47,6 +51,8 @@ function addTeamMember() {
 }
 
 /* ------------------------- Get manager data inputs ------------------------ */
+
+// On init() the addManager() function kicks off the questions to the user
 function addManager() {
     inquirer
         .prompt([
@@ -84,6 +90,7 @@ function addManager() {
 }
 
 /* ------------------------ Get engineer data inputs ------------------------ */
+
 // These are questions specific to an engineer
 function addEngineer() {
     inquirer
@@ -121,6 +128,8 @@ function addEngineer() {
 }
 
 /* ------------------------- Get intern data inputs ------------------------- */
+
+// These are questions specific to an intern
 function addIntern() {
     inquirer
         .prompt([
